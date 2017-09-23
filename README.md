@@ -20,7 +20,7 @@ you shout when reading code](http://www.osnews.com/images/comics/wtfm.jpg)
 
 Software engineering principles, from Robert C. Martin's book
 [*Clean Code*](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
-adapted for JavaScript. This is not a style guide. It's a guide to producing
+adapted for Java. This is not a style guide. It's a guide to producing
 [readable, reusable, and refactorable](https://github.com/ryanmcdermott/3rs-of-software-architecture) software in Java.
 
 Not every principle herein has to be strictly followed, and even fewer will be
@@ -32,7 +32,7 @@ Our craft of software engineering is just a bit over 50 years old, and we are
 still learning a lot. When software architecture is as old as architecture
 itself, maybe then we will have harder rules to follow. For now, let these
 guidelines serve as a touchstone by which to assess the quality of the
-JavaScript code that you and your team produce.
+Java code that you and your team produce.
 
 One more thing: knowing these won't immediately make you a better software
 developer, and working with them for many years doesn't mean you won't make
@@ -45,18 +45,29 @@ improvement. Beat up the code instead!
 ### Use meaningful and pronounceable variable names
 
 **Bad:**
-
+```java
+String yyyymmdstr = new SimpleDateFormat("YYYY/MM/DD").format(new Date());
+```
 
 **Good:**
-
+```java
+String currentDate = new SimpleDateFormat("YYYY/MM/DD").format(new Date());
+```
 **[⬆ back to top](#table-of-contents)**
 
 ### Use the same vocabulary for the same type of variable
 
 **Bad:**
-
+```java
+getUserInfo();
+getClientData();
+getCustomerRecord();
+```
 
 **Good:**
+```java
+getUser();
+```
 
 
 **[⬆ back to top](#table-of-contents)**
@@ -68,28 +79,67 @@ being meaningful for understanding our program, we hurt our readers.
 Make your names searchable.
 
 **Bad:**
+```java
+// What the heck is 86400000 for?
+setTimeout(blastOff, 86400000);
 
+```
 
 **Good:**
+```java
+// Declare them as capitalized `const` globals.
+public static final int MILLISECONDS_IN_A_DAY = 86400000;
 
+setTimeout(blastOff, MILLISECONDS_IN_A_DAY);
+
+```
 **[⬆ back to top](#table-of-contents)**
 
 ### Use explanatory variables
 **Bad:**
+```java
 
+```
 
 **Good:**
+```java
 
+```
 **[⬆ back to top](#table-of-contents)**
 
 ### Avoid Mental Mapping
+Don’t force the reader of your code to translate what the variable means.
 Explicit is better than implicit.
-
 **Bad:**
+```java
+String [] l = {"Austin", "New York", "San Francisco"};
 
+for (int i = 0; i < l.length; i++) {
+    String li = l[i];
+    doStuff();
+    doSomeOtherStuff();
+    // ...
+    // ...
+    // ...
+    // Wait, what is `$li` for again?
+    dispatch(li);
+ }
+```
 
 **Good:**
 
+```java
+String[] locations = {"Austin", "New York", "San Francisco"};
+
+for (String location : locations) {
+    doStuff();
+    doSomeOtherStuff();
+    // ...
+    // ...
+    // ...
+    dispatch(location);
+ }
+```
 **[⬆ back to top](#table-of-contents)**
 
 ### Don't add unneeded context
@@ -97,19 +147,30 @@ If your class/object name tells you something, don't repeat that in your
 variable name.
 
 **Bad:**
+```java
+class Car {
+  public String carMake = "Honda";
+  public String carModel = "Accord";
+  public String carColor = "Blue";
+}
+
+void paintCar(Car car) {
+  car.carColor = "Red";
+}
+```
 
 **Good:**
+```java
+class Car {
+  public String make = "Honda";
+  public String model = "Accord";
+  public String color = "Blue";
+}
 
-**[⬆ back to top](#table-of-contents)**
-
-### Use default arguments instead of short circuiting or conditionals
-
-
-**Bad:**
-
-
-**Good:**
-
+void paintCar(Car car) {
+  car.color = "Red";
+}
+```
 **[⬆ back to top](#table-of-contents)**
 
 ## **Functions**
