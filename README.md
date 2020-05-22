@@ -716,9 +716,58 @@ top-to-bottom, like a newspaper. Because of this, make your code read that way.
 Comments are an apology, not a requirement. Good code *mostly* documents itself.
 
 **Bad:**
+```java
+// Creating a List of Integers 
+List<Integer> list = Arrays.asList(3, 5, 7, 9, 11); 
+
+// Using Stream findFirst() 
+Optional<Integer> answer = list.stream().findFirst(); 
+
+// if the stream is empty, an empty 
+// Optional is returned. 
+if (answer.isPresent()) { 
+    System.out.println(answer.get()); 
+} 
+else { 
+    System.out.println("no value"); 
+} 
+```
 
 
 **Good:**
+```java
+List<Integer> list = Arrays.asList(3, 5, 7, 9, 11); 
+
+Optional<Integer> answer = list.stream().findFirst(); 
+
+if (answer.isPresent()) { 
+    System.out.println(answer.get()); 
+} 
+else { 
+    System.out.println("no value"); 
+} 
+```
+
+**[⬆ back to top](#table-of-contents)**
+
+### Don't Use a Comment When You Can Use a Function or a Variable
+The best comment is no comment
+
+**Bad:**
+```java
+//Check to see if order is eligible to ship
+if((order.isPaid & order.isLabeled) && CUSTOMER_FLAG) {
+  // ...
+}
+```
+
+
+**Good:**
+```java
+if(order.isEligibleToShip()) {
+  // ...
+}
+```
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -726,9 +775,17 @@ Comments are an apology, not a requirement. Good code *mostly* documents itself.
 Version control exists for a reason. Leave old code in your history.
 
 **Bad:**
+```java
+cleanCode();
+//cleanerCode()
+//cleanestCode()
+```
 
 
 **Good:**
+```java
+cleanCode();
+```
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -737,8 +794,23 @@ Remember, use version control! There's no need for dead code, commented code,
 and especially journal comments. Use `git log` to get history!
 
 **Bad:**
+```java
+/**
+ * 2021-03-06: Renamed clean to cleanCode (DL)
+ * 2020-01-03: Changed return value (LB)
+ * 2019-05-12: Added clean method (DL)
+ */
+ cleanCode(String code) {
+   return null;
+ }
+```
 
 **Good:**
+```java
+ cleanCode(String code) {
+   return null;
+ }
+```
 
 **[⬆ back to top](#table-of-contents)**
 
@@ -747,8 +819,25 @@ They usually just add noise. Let the functions and variable names along with the
 proper indentation and formatting give the visual structure to your code.
 
 **Bad:**
+```java
+////////////////////////////////////////////////////////////////////////////////
+// Instantiate Order List
+////////////////////////////////////////////////////////////////////////////////
+List<Order> orders = new ArrayList();
+
+////////////////////////////////////////////////////////////////////////////////
+// Ship Orders that are eligible
+////////////////////////////////////////////////////////////////////////////////
+ 
+orders.filter(Order::isEligibleToShip).forEach(x -> ship(x));
+```
 
 **Good:**
+```java
+List<Order> orders = new ArrayList();
+
+orders.filter(Order::isEligibleToShip).forEach(x -> ship(x));
+```
 
 **[⬆ back to top](#table-of-contents)**
 
