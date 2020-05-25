@@ -717,16 +717,16 @@ Comments are an apology, not a requirement. Good code *mostly* documents itself.
 
 **Bad:**
 ```java
-// Creating a List of Integers 
-List<Integer> list = Arrays.asList(3, 5, 7, 9, 11); 
+// Creating a List of customer names 
+List<String> customerNames = Arrays.asList('Bob', 'Linda', 'Steve', 'Mary'); 
 
 // Using Stream findFirst() 
-Optional<Integer> answer = list.stream().findFirst(); 
+Optional<String> firstCustomer = customerNames.stream().findFirst(); 
 
 // if the stream is empty, an empty 
 // Optional is returned. 
-if (answer.isPresent()) { 
-    System.out.println(answer.get()); 
+if (firstCustomer.isPresent()) { 
+    System.out.println(firstCustomer.get()); 
 } 
 else { 
     System.out.println("no value"); 
@@ -736,12 +736,12 @@ else {
 
 **Good:**
 ```java
-List<Integer> list = Arrays.asList(3, 5, 7, 9, 11); 
+List<String> customerNames = Arrays.asList('Bob', 'Linda', 'Steve', 'Mary'); 
 
-Optional<Integer> answer = list.stream().findFirst(); 
+Optional<String> firstCustomer = customerNames.stream().findFirst(); 
 
-if (answer.isPresent()) { 
-    System.out.println(answer.get()); 
+if (firstCustomer.isPresent()) { 
+    System.out.println(firstCustomer.get()); 
 } 
 else { 
     System.out.println("no value"); 
@@ -776,15 +776,16 @@ Version control exists for a reason. Leave old code in your history.
 
 **Bad:**
 ```java
-cleanCode();
-//cleanerCode()
-//cleanestCode()
+doStuff();
+// doOtherStuff();
+// doSomeMoreStuff();
+// doSoMuchStuff();
 ```
 
 
 **Good:**
 ```java
-cleanCode();
+doStuff();
 ```
 
 **[⬆ back to top](#table-of-contents)**
